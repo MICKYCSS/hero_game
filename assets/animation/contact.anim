@@ -1,17 +1,17 @@
 [
   {
     "__type__": "cc.AnimationClip",
-    "_name": "stand",
+    "_name": "contact",
     "_objFlags": 0,
     "__editorExtras__": {
       "embeddedPlayerGroups": []
     },
     "_native": "",
-    "sample": 60,
-    "speed": 0.08,
+    "sample": 8,
+    "speed": 1,
     "wrapMode": 2,
     "enableTrsBlending": false,
-    "_duration": 0.1,
+    "_duration": 0.75,
     "_hash": 500763545,
     "_tracks": [
       {
@@ -57,11 +57,12 @@
   {
     "__type__": "cc.ObjectCurve",
     "_times": [
-      0.016666666666666666,
-      0.03333333333333333,
-      0.05,
-      0.06666666666666667,
-      0.08333333333333333
+      0,
+      0.125,
+      0.25,
+      0.375,
+      0.5,
+      0.625
     ],
     "_values": [
       {
@@ -77,11 +78,15 @@
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "e9b908b5-c112-4105-9f8c-097b48314a29@f9941",
+        "__uuid__": "550cac2d-bd49-46c0-8115-7616b052ffa0@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "bc63a53a-3517-4e7d-a9e0-784990249243@f9941",
+        "__uuid__": "550cac2d-bd49-46c0-8115-7616b052ffa0@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
+      {
+        "__uuid__": "550cac2d-bd49-46c0-8115-7616b052ffa0@f9941",
         "__expectedType__": "cc.SpriteFrame"
       }
     ]
