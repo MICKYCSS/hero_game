@@ -1,14 +1,17 @@
 import {
     _decorator, Component, Node, Prefab, instantiate, v3, RigidBody2D, ERigidBody2DType,
-    BoxCollider2D, Contact2DType, Size, tween, Label, Color,Animation
+    BoxCollider2D, Contact2DType, Size, tween, Label, Color,Animation, AudioSource,AudioClip,
 } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('star')
 export class star extends Component {
+    @property(AudioClip)
+    public audioClip: AudioClip = null; // 音效
+    @property(AudioClip)
+    public boomAudioClip: AudioClip = null; // 爆炸
     @property(Prefab)
     public itemPrefab: Prefab = null; // 物品预制体
-
 
     @property
     public itemInterval: number = 1; // 物品的生成间隔时间
@@ -32,33 +35,63 @@ export class star extends Component {
             const item = instantiate(this.itemPrefab);
             const collider = item.getComponent(BoxCollider2D)
             const rigidBody = item.getComponent(RigidBody2D)
-            const animation = item.getComponent(Animation)
-            console.log(animation,'animation')
-            rigidBody.gravityScale = Math.random() * (2 - 0.5) + 0.5
+            const starItem = item.getChildByName('starItem')
+            const animation = starItem.getComponent(Animation)
+            const soundEffect = starItem.getComponent(AudioSource)
+            rigidBody.gravityScale = Math.random() * 1.2 + 0.2
+          
             collider.on(Contact2DType.BEGIN_CONTACT, (ev, other) => {
-                tween(item)
-                    .to(1, {  })
-                    .call(() => {
-                        if (this.targetScore > this.score && other.node._name === 'player') {
-                            this.score = this.score + 1
+                const position = item.getPosition()
+                    if (position.y>-450&& this.targetScore > this.score && other.node._name === 'player') {
+                        this.score = this.score + 1
+                        soundEffect.clip = this.audioClip
+                        soundEffect.play()
+                        if(animation&&animation.isValid){
+                            animation.play('disappear')
+                            animation.on('finished' as any,()=>{
+                                setTimeout(() => {
+                                    item.destroy()
+                                }, 200);
+                            })
                         }
-                        this.label.string = `目标分数：${this.targetScore} 当前得分：${this.score}`
-                        animation.play('disappear')
-                        item.destroy()
-                        if (this.targetScore === this.score && !this.pass) {
-                            this.pass = true
-                            const node = new Node()
-                            node.setPosition(285, -250)
-                            node.setScale(0,0)
-                            this.node.addChild(node)
-                            const passLabel = node.addComponent(Label)
-                            passLabel.string = '目标达成'
-                            passLabel.fontSize = 36
-                            passLabel.color = Color.GREEN
-                            tween(node).to(.3,{scale:v3(1,1)}).start()
-                        }
-                    })
-                    .start();
+                    }else if(other.node._name === 'ground'){
+                        soundEffect.clip = this.boomAudioClip
+                        soundEffect.volume = 0.2
+                        soundEffect.play()
+                        animation.play('blow')
+                        animation.on('finished' as any,()=>{
+                            setTimeout(() => {
+                                item.destroy()
+                            }, 200);
+                        })
+                    }
+                    this.label.string = `目标分数：${this.targetScore} 当前得分：${this.score}`
+                  
+                    if (this.targetScore === this.score && !this.pass) {
+                        this.pass = true
+                        const node = new Node()
+                        node.setPosition(285, -250)
+                        node.setScale(0,0)
+                        this.node.addChild(node)
+                        const passLabel = node.addComponent(Label)
+                        passLabel.string = '目标达成'
+                        passLabel.fontSize = 36
+                        passLabel.color = Color.GREEN
+                        tween(node).to(.3,{scale:v3(1,1)}).start()
+                    }
+                    // setTimeout(() => {
+                    //     item.setScale(v3(0,0))
+                    //     item.destroy()
+                    // }, 1000);
+                    // setTimeout(() => {
+                    //     
+                    // }, 100);
+                    // tween(item)
+                    // .to(.5, {scale:v3(0,0) })
+                    // .call(() => {
+                    // })
+                    // .start();
+                    
             })
             // 添加刚体组件
             // const rigidBody = item.addComponent(RigidBody2D)
@@ -83,7 +116,6 @@ export class star extends Component {
     onLoad() {
         this.label = this.node.getComponent(Label)
         this.label.string = `目标分数：${this.targetScore} 当前得分：${this.score}`
-
 
     }
 

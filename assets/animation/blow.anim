@@ -104,6 +104,7 @@
   {
     "__type__": "cc.ObjectCurve",
     "_times": [
+      0,
       0.03333333333333333,
       0.06666666666666667,
       0.1,
@@ -114,6 +115,10 @@
       0.26666666666666666
     ],
     "_values": [
+      {
+        "__uuid__": "579bb82e-342a-4327-b07e-78f914e23ddf@f9941",
+        "__expectedType__": "cc.SpriteFrame"
+      },
       {
         "__uuid__": "48590c15-a284-4efd-9a3c-2aaba339a3e9@f9941",
         "__expectedType__": "cc.SpriteFrame"
