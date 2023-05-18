@@ -1,5 +1,7 @@
-import { _decorator, Component, Node,Prefab,instantiate,v3,RigidBody2D,ERigidBody2DType,
-BoxCollider2D,Contact2DType,Size} from 'cc';
+import {
+    _decorator, Component, Node, Prefab, instantiate, v3, RigidBody2D, ERigidBody2DType,
+    BoxCollider2D, Contact2DType, Size, tween, Label, Color
+} from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('star')
@@ -7,32 +9,51 @@ export class star extends Component {
     @property(Prefab)
     public itemPrefab: Prefab = null; // 物品预制体
 
-    @property
-    public itemSpeed: number = 2; // 物品的下落速度
 
     @property
-    public itemInterval: number = 2; // 物品的生成间隔时间
+    public itemInterval: number = 1; // 物品的生成间隔时间
 
     private timer: number = 0; // 计时器
+    private label: Label = null; // 分数文案
+    private score: number = 0; // 分数
+    private targetScore: number = 1 // 目标分数
+    private pass: boolean = false; // 是否通关
+
     start() {
 
     }
 
     update(deltaTime: number) {
+        if (this.pass) return
         this.timer += deltaTime;
         if (this.timer >= this.itemInterval) {
             this.timer = 0;
             // 复制克隆一份
             const item = instantiate(this.itemPrefab);
             const collider = item.getComponent(BoxCollider2D)
-            collider.on(Contact2DType.BEGIN_CONTACT,(ev,other)=>{
-                setTimeout(() => {
-                    item.destroy()
-                }, 300);
-               
-                // if(other.node._name === 'ground'){
-                //     item.destroy()
-                // }
+            collider.on(Contact2DType.BEGIN_CONTACT, (ev, other) => {
+                tween(item)
+                    .to(0.1, { scale: v3(0, 0) })
+                    .call(() => {
+                        if (this.targetScore > this.score && other.node._name === 'player') {
+                            this.score = this.score + 1
+                        }
+                        this.label.string = `目标分数：${this.targetScore} 当前得分：${this.score}`
+                        item.destroy()
+                        if (this.targetScore === this.score && !this.pass) {
+                            this.pass = true
+                            const node = new Node()
+                            node.setPosition(285, -250)
+                            node.setScale(0,0)
+                            this.node.addChild(node)
+                            const passLabel = node.addComponent(Label)
+                            passLabel.string = '目标达成'
+                            passLabel.fontSize = 36
+                            passLabel.color = Color.GREEN
+                            tween(node).to(.3,{scale:v3(1,1)}).start()
+                        }
+                    })
+                    .start();
             })
             // 添加刚体组件
             // const rigidBody = item.addComponent(RigidBody2D)
@@ -50,8 +71,15 @@ export class star extends Component {
             const x = Math.random() * 600 - 300;
             item.setPosition(v3(x, 500, 0));
             this.node.addChild(item);
-           
+
         }
+    }
+
+    onLoad() {
+        this.label = this.node.getComponent(Label)
+        this.label.string = `目标分数：${this.targetScore} 当前得分：${this.score}`
+
+
     }
 
 }
