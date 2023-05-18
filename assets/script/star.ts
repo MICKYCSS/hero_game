@@ -1,6 +1,6 @@
 import {
     _decorator, Component, Node, Prefab, instantiate, v3, RigidBody2D, ERigidBody2DType,
-    BoxCollider2D, Contact2DType, Size, tween, Label, Color
+    BoxCollider2D, Contact2DType, Size, tween, Label, Color,Animation
 } from 'cc';
 const { ccclass, property } = _decorator;
 
@@ -32,15 +32,18 @@ export class star extends Component {
             const item = instantiate(this.itemPrefab);
             const collider = item.getComponent(BoxCollider2D)
             const rigidBody = item.getComponent(RigidBody2D)
+            const animation = item.getComponent(Animation)
+            console.log(animation,'animation')
             rigidBody.gravityScale = Math.random() * (2 - 0.5) + 0.5
             collider.on(Contact2DType.BEGIN_CONTACT, (ev, other) => {
                 tween(item)
-                    .to(0.1, { scale: v3(0, 0) })
+                    .to(1, {  })
                     .call(() => {
                         if (this.targetScore > this.score && other.node._name === 'player') {
                             this.score = this.score + 1
                         }
                         this.label.string = `目标分数：${this.targetScore} 当前得分：${this.score}`
+                        animation.play('disappear')
                         item.destroy()
                         if (this.targetScore === this.score && !this.pass) {
                             this.pass = true
