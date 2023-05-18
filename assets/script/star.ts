@@ -16,7 +16,7 @@ export class star extends Component {
     private timer: number = 0; // 计时器
     private label: Label = null; // 分数文案
     private score: number = 0; // 分数
-    private targetScore: number = 1 // 目标分数
+    private targetScore: number = 5 // 目标分数
     private pass: boolean = false; // 是否通关
 
     start() {
@@ -31,6 +31,8 @@ export class star extends Component {
             // 复制克隆一份
             const item = instantiate(this.itemPrefab);
             const collider = item.getComponent(BoxCollider2D)
+            const rigidBody = item.getComponent(RigidBody2D)
+            rigidBody.gravityScale = Math.random() * (2 - 0.5) + 0.5
             collider.on(Contact2DType.BEGIN_CONTACT, (ev, other) => {
                 tween(item)
                     .to(0.1, { scale: v3(0, 0) })
