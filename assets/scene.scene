@@ -1194,6 +1194,8 @@
       "__uuid__": "f0a3f7ad-749d-4785-a338-d2cd5be4b423",
       "__expectedType__": "cc.Prefab"
     },
+    "countdownLabel": null,
+    "countdownNode": null,
     "itemInterval": 2,
     "_id": "fdae9XM+RLJa9hekyclLDi"
   },

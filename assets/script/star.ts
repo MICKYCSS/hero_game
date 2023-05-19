@@ -8,25 +8,37 @@ const { ccclass, property } = _decorator;
 export class star extends Component {
     @property(AudioClip)
     public audioClip: AudioClip = null; // 音效
+
     @property(AudioClip)
     public boomAudioClip: AudioClip = null; // 爆炸
+
     @property(Prefab)
     public itemPrefab: Prefab = null; // 物品预制体
 
+    @property(Label)
+    private countdownLabel: Label = null; //倒计时
+    @property(Node)
+    private countdownNode: Node = null
+
     @property
-    public itemInterval: number = 1; // 物品的生成间隔时间
+    private itemInterval: number = 1; // 物品的生成间隔时间
 
     private timer: number = 0; // 计时器
     private label: Label = null; // 分数文案
     private score: number = 0; // 分数
     private targetScore: number = 5 // 目标分数
     private pass: boolean = false; // 是否通关
+    private countdownNum: number = 4;
+    private countdownInterval: number = 1000;
+    private countdownTimer: number = null;
+    private gameStart:boolean = false
 
     start() {
 
     }
 
     update(deltaTime: number) {
+        if(!this.gameStart)return
         if (this.pass) return
         this.timer += deltaTime;
         if (this.timer >= this.itemInterval) {
@@ -117,6 +129,42 @@ export class star extends Component {
         this.label = this.node.getComponent(Label)
         this.label.string = `目标分数：${this.targetScore} 当前得分：${this.score}`
 
+        const node = new Node('countdownLabel')
+        node.setPosition(285, -250)
+        this.node.addChild(node)
+        const label =  node.addComponent(Label)
+        label.fontSize = 36
+        label.string = '游戏即将开始'
+        this.countdownLabel = label
+        this.countdownNode = node
+        setTimeout(() => {
+            this.startCountdown()
+        }, 2000);
+
+    }
+    onDestroy(){
+        if (this.countdownTimer) {
+            clearInterval(this.countdownTimer);
+            this.countdownTimer = null;
+        }
+    }
+
+    startCountdown(){
+        this.countdownTimer = setInterval(()=>{
+            this.countdownNum--;
+            if (this.countdownNum >= 1) {
+                this.countdownLabel.string = this.countdownNum.toString();
+            } else {
+                this.countdownLabel.string = "Go!";
+                clearInterval(this.countdownTimer);
+                this.countdownTimer = null;
+                this.scheduleOnce(() => {
+                    // 倒计时结束后的逻辑
+                    this.countdownNode.destroy()
+                    this.gameStart = true
+                }, 1);
+            }
+        },this.countdownInterval)
     }
 
 }
