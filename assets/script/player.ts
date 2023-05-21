@@ -101,6 +101,11 @@ export class player extends Component {
         this.animation.play(animationName)
     }
 
+    // 跳跃
+    initJump() {
+       
+    }
+
 
 }
 
