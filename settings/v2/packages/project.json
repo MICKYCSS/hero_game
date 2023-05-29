@@ -24,10 +24,11 @@
   },
   "general": {
     "designResolution": {
-      "width": 1920,
-      "height": 1080,
-      "fitHeight": true,
-      "fitWidth": false
+      "width": 750,
+      "height": 1334,
+      "fitHeight": false,
+      "fitWidth": true
     }
-  }
+  },
+  "custom_joint_texture_layouts": []
 }
