@@ -24,11 +24,8 @@
   },
   "general": {
     "designResolution": {
-      "width": 750,
-      "height": 1334,
-      "fitHeight": false,
-      "fitWidth": true
+      "width": 637,
+      "height": 475
     }
-  },
-  "custom_joint_texture_layouts": []
+  }
 }
