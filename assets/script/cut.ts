@@ -1,16 +1,27 @@
 import {
-    _decorator, Component, Node, Graphics, Color, Canvas, UITransform, systemEvent, SystemEvent, v3,
-    v2, Camera, director, CameraComponent
+    _decorator, Component, Node, Graphics, Color,color, Canvas, UITransform, systemEvent, SystemEvent, v3,
+    v2, Camera, director, CameraComponent,AudioClip, AudioSource
 } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('cut')
 export class cut extends Component {
+    @property(AudioClip)
+    public audioClip: AudioClip = null; // 音效
+
     private startPos = null // 划动开始位置
     private endPos = null // 划动结束位置
     private lineNode = null // 划动轨迹效果
     private lineGraphics: Graphics = null // 划动轨迹的绘制组件
 
+    getPos (point) {
+        const { x, y } = this.node.parent.getPosition()
+        return [
+            (point.x - x) / 2,
+            (point.y - y) / 2,
+        ]
+
+    }
     onTouchStart(event) {
         console.log('onTouchStart')
         this.startPos = event.getLocation() // 划动开始位置
@@ -41,30 +52,39 @@ export class cut extends Component {
         if (!this.lineGraphics) { // 如果绘制组件为空，创建一个
             this.lineGraphics = this.node.parent.addComponent(Graphics)
         }
-        this.lineGraphics.lineWidth = 10 // 设置轨迹的宽度
-        this.lineGraphics.strokeColor = Color.RED; // 设置轨迹颜色以及不透明度
+        this.lineGraphics.lineWidth = 3 // 设置轨迹的宽度
+        this.lineGraphics.strokeColor = color(135, 206, 235); // 设置轨迹颜色以及不透明度
         const uiTransform = this.lineNode.getComponent(UITransform)
         let startPoint = uiTransform.convertToNodeSpaceAR(v3(this.startPos.x, this.startPos.y, 0)) // 节点空间转化
         let endPoint = uiTransform.convertToNodeSpaceAR(v3(pos.x, pos.y, 0)) // 节点空间转化
-        const getPos = (point) => {
-            const { x, y } = this.node.parent.getPosition()
-            return [
-                (point.x - x) / 2,
-                (point.y - y) / 2,
-            ]
 
-        }
-        const [startX, startY] = getPos(startPoint)
-        const [endX, endY] = getPos(endPoint)
+        const [startX, startY] = this.getPos(startPoint)
+        const [endX, endY] = this.getPos(endPoint)
         this.lineGraphics.moveTo(startX, startY) // 移动到起始点
         this.lineGraphics.lineTo(endX, endY) // 划动到结束点
         this.lineGraphics.stroke();
+      
         this.startPos = pos
     }
 
     onTouchEnd(event) {
-        console.log('onTouchEnd')
+        
+        const audio =  this.node.addComponent(AudioSource)
+        audio.clip = this.audioClip
+        audio.play()
+     
         this.endPos = event.getLocation() // 划动结束位置
+        const uiTransform = this.lineNode.getComponent(UITransform)
+        let endPoint = uiTransform.convertToNodeSpaceAR(v3(this.endPos.x, this.endPos.y, 0)) // 节点空间转化
+        const [endX, endY] = this.getPos(endPoint)
+        const fruit = this.node.getChildByPath("sandia")
+        const {x:fruitX,y:fruitY} = fruit.getPosition()
+        if(endX + 50 >= fruitX||endX-50<=fruitX||endY+43>= fruitY||endY-43<=fruitY){
+            console.log()
+        // director.loadScene('scene-2')
+        }
+        console.log('onTouchEnd',endX,fruitX)
+
         let lineHeight = this.endPos.y - this.startPos.y
         let lineWidth = this.endPos.x - this.startPos.x
         this.lineGraphics.clear()
