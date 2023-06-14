@@ -1,6 +1,6 @@
 import {
     _decorator, Component, Node, Graphics, Color,color, Canvas, UITransform, systemEvent, SystemEvent, v3,
-    v2, Camera, director, CameraComponent,AudioClip, AudioSource
+    v2, Camera, director, CameraComponent,AudioClip, AudioSource, rect,Rect, Intersection2D
 } from 'cc';
 const { ccclass, property } = _decorator;
 
@@ -68,26 +68,9 @@ export class cut extends Component {
     }
 
     onTouchEnd(event) {
-        
-        const audio =  this.node.addComponent(AudioSource)
-        audio.clip = this.audioClip
-        audio.play()
-     
         this.endPos = event.getLocation() // 划动结束位置
-        const uiTransform = this.lineNode.getComponent(UITransform)
-        let endPoint = uiTransform.convertToNodeSpaceAR(v3(this.endPos.x, this.endPos.y, 0)) // 节点空间转化
-        const [endX, endY] = this.getPos(endPoint)
-        const fruit = this.node.getChildByPath("sandia")
-        const {x:fruitX,y:fruitY} = fruit.getPosition()
-        if(endX + 50 >= fruitX||endX-50<=fruitX||endY+43>= fruitY||endY-43<=fruitY){
-            console.log()
-        // director.loadScene('scene-2')
-        }
-        console.log('onTouchEnd',endX,fruitX)
-
         let lineHeight = this.endPos.y - this.startPos.y
         let lineWidth = this.endPos.x - this.startPos.x
-        this.lineGraphics.clear()
         if (!this.lineNode) {
             return
         }
@@ -101,6 +84,17 @@ export class cut extends Component {
             this.lineNode = null
             return
         }
+        const uiTransform = this.lineGraphics.getComponent(UITransform)
+        let boundBox = uiTransform.getBoundingBox() 
+
+        const fruit = this.node.getChildByPath("sandia")
+        const pos = fruit.getPosition() //水果位置 
+        // if(this.lineBoxIntersect(boundBox,pos)){
+           
+        // }
+        this.lineGraphics.clear()
+        this.playAudio()
+        director.loadScene('scene-2')
         // let fruits = this.fruits.getChildren() // 获取当前界面中的所有水果节点
         // for (let i = 0; i < fruits.length; i++) {
         //     let fruit = fruits[i]
@@ -112,6 +106,18 @@ export class cut extends Component {
         //         fruit.getComponent(Fruit).splitFruit(pos1, lineNode) // 切水果
         //     }
         // }
+    }
+    playAudio(){
+        const audio =  this.node.addComponent(AudioSource)
+        audio.clip = this.audioClip
+        audio.play()
+    }
+    lineBoxIntersect(lineRect,fruitPos){
+        let rec = rect(new Rect(lineRect.x,lineRect.y,lineRect.width,lineRect.height) )
+        let center = v2(fruitPos.x,fruitPos.y)
+        console.log(rec,center,'lineBoxIntersect')
+
+        return Intersection2D.rectCircle(rec,center,10)
     }
     onLoad() {
         systemEvent.on(SystemEvent.EventType.TOUCH_START, this.onTouchStart, this)
