@@ -390,7 +390,7 @@
     },
     "_enabled": true,
     "__prefab": null,
-    "enabledContactListener": false,
+    "enabledContactListener": true,
     "bullet": false,
     "awakeOnLoad": true,
     "_group": 1,
@@ -409,7 +409,7 @@
     "_id": "80RbNlMPdCp6/J7Ml60bdI"
   },
   {
-    "__type__": "cc.BoxCollider2D",
+    "__type__": "cc.PolygonCollider2D",
     "_name": "",
     "_objFlags": 0,
     "node": {
@@ -428,12 +428,109 @@
       "x": 0,
       "y": 0
     },
-    "_size": {
-      "__type__": "cc.Size",
-      "width": 960,
-      "height": 40
-    },
-    "_id": "787JRxqtxC55J+g3adH/1a"
+    "_points": [
+      {
+        "__type__": "cc.Vec2",
+        "x": -480,
+        "y": -20
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": -475.3,
+        "y": 616.5
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": -442.8,
+        "y": 617.5
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": -442,
+        "y": 21.4
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": -323.6,
+        "y": 17.2
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": -301.4,
+        "y": 3.9
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": -134.2,
+        "y": 4.4
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": -111.9,
+        "y": 19.8
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 56.7,
+        "y": 18
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 85.1,
+        "y": 5.1
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 226.2,
+        "y": 6.9
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 247.3,
+        "y": 18.4
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 371.3,
+        "y": 19.1
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 371.6,
+        "y": 60.3
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 420.7,
+        "y": 59.5
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 420.9,
+        "y": 103.2
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 441.7,
+        "y": 100.8
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 440.3,
+        "y": 611.4
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 476.8,
+        "y": 611.7
+      },
+      {
+        "__type__": "cc.Vec2",
+        "x": 480,
+        "y": -20
+      }
+    ],
+    "_id": "1a0tzMAJlD2LITaVub4CCe"
   },
   {
     "__type__": "cc.Node",
@@ -641,7 +738,7 @@
     "_enabled": true,
     "__prefab": null,
     "tag": 0,
-    "_group": 1,
+    "_group": 8,
     "_density": 1,
     "_sensor": false,
     "_friction": 0.2,
@@ -850,7 +947,7 @@
     "_enabled": true,
     "__prefab": null,
     "tag": 0,
-    "_group": 1,
+    "_group": 8,
     "_density": 1,
     "_sensor": false,
     "_friction": 0.2,
