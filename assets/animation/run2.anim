@@ -1,17 +1,17 @@
 [
   {
     "__type__": "cc.AnimationClip",
-    "_name": "disappear",
+    "_name": "run-2",
     "_objFlags": 0,
     "__editorExtras__": {
       "embeddedPlayerGroups": []
     },
     "_native": "",
-    "sample": 40,
+    "sample": 10,
     "speed": 1,
-    "wrapMode": 1,
+    "wrapMode": 2,
     "enableTrsBlending": false,
-    "_duration": 0.225,
+    "_duration": 0.4,
     "_hash": 500763545,
     "_tracks": [
       {
@@ -58,50 +58,25 @@
     "__type__": "cc.ObjectCurve",
     "_times": [
       0,
-      0.025,
-      0.05,
-      0.075,
       0.1,
-      0.125,
-      0.15,
-      0.175,
-      0.2
+      0.2,
+      0.3
     ],
     "_values": [
       {
-        "__uuid__": "579bb82e-342a-4327-b07e-78f914e23ddf@f9941",
+        "__uuid__": "a34ead7a-fa60-40b2-9021-c40ebb6bb25e@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "82ea506b-9f2e-4202-9039-59c1d80323ed@f9941",
+        "__uuid__": "370279e0-3fd6-4f65-b52c-89bb5260d494@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "e0c0a4b0-3b4a-4a55-b72d-aae1cd0a3fad@f9941",
+        "__uuid__": "385fd6bf-9042-4702-ade4-05091c97f5b7@f9941",
         "__expectedType__": "cc.SpriteFrame"
       },
       {
-        "__uuid__": "c1f407ef-2f9d-4ca7-ae69-b45a3de92b7d@f9941",
-        "__expectedType__": "cc.SpriteFrame"
-      },
-      {
-        "__uuid__": "8e155d9c-b0eb-4102-8d9f-f3e07942b5d2@f9941",
-        "__expectedType__": "cc.SpriteFrame"
-      },
-      {
-        "__uuid__": "9cd94950-0045-44a1-9814-af3b9e49b47b@f9941",
-        "__expectedType__": "cc.SpriteFrame"
-      },
-      {
-        "__uuid__": "697075bd-2a5c-4fc6-953c-7903bb9fbeff@f9941",
-        "__expectedType__": "cc.SpriteFrame"
-      },
-      {
-        "__uuid__": "3f57c0cf-dc1a-4c23-9db8-202cf4cf6046@f9941",
-        "__expectedType__": "cc.SpriteFrame"
-      },
-      {
-        "__uuid__": "d9f40b53-2dce-431c-ae4a-bccabb25c4a8@f9941",
+        "__uuid__": "73b24a4d-e1ab-43fe-9d6a-54d08b1699e0@f9941",
         "__expectedType__": "cc.SpriteFrame"
       }
     ]

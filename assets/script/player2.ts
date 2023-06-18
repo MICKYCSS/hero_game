@@ -4,28 +4,32 @@ import {
 } from 'cc';
 const { ccclass, property } = _decorator;
 
-@ccclass('player')
-export class player extends Component {
+@ccclass('player2')
+export class player2 extends Component {
     private collider: BoxCollider2D = null;
-    private animationName: string = 'stand'
+    private animationName: string = 'stand2'
     private animation: Animation = null
     private accLeft: boolean = false;
     private accRight: boolean = false;
     private xSpeed: number = 0;
     private maxSpeed: number = 500
-
     update(deltaTime: number) {
+       this.move(deltaTime)
+
+    }
+
+    move(deltaTime: number){
         let animationName = this.animationName
         if (this.accLeft) {
             // 每帧更新速度
             this.xSpeed = -300;
-            animationName = 'run'
+            animationName = 'run2'
         } else if (this.accRight) {
             this.xSpeed = 300;
-            animationName = 'run'
+            animationName = 'run2'
         } else {
             this.xSpeed = 0
-            animationName = 'stand'
+            animationName = 'stand2'
         }
         if (Math.abs(this.xSpeed) > this.maxSpeed) {
             this.xSpeed = this.maxSpeed * this.xSpeed / Math.abs(this.xSpeed);
@@ -35,7 +39,6 @@ export class player extends Component {
         pos.x += this.xSpeed * deltaTime
         this.node.setPosition(pos)
         this.setAnimation(animationName)
-
     }
 
     onLoad() {
@@ -67,16 +70,14 @@ export class player extends Component {
     }
 
     onKeyDown(event: EventKeyboard) {
+        console.log('onKeyDown')
         switch (event.keyCode) {
-            case KeyCode.KEY_W:
             case KeyCode.ARROW_UP:
                 break;
-            case KeyCode.KEY_A:
             case KeyCode.ARROW_LEFT:
                 this.accLeft = true
                 this.node.setScale(v3(-1, 1))
                 break;
-            case KeyCode.KEY_D:
             case KeyCode.ARROW_RIGHT:
                 this.accRight = true
                 this.node.setScale(v3(1, 1))
