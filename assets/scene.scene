@@ -177,7 +177,7 @@
     "_priority": 0,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 385.73816155988857,
+    "_orthoHeight": 579.4142259414226,
     "_near": 0,
     "_far": 1000,
     "_color": {
@@ -581,9 +581,9 @@
     "_group": 1,
     "_type": 2,
     "_allowSleep": true,
-    "_gravityScale": 1,
-    "_linearDamping": 0,
-    "_angularDamping": 0,
+    "_gravityScale": 10,
+    "_linearDamping": 2,
+    "_angularDamping": 2,
     "_linearVelocity": {
       "__type__": "cc.Vec2",
       "x": 0,
