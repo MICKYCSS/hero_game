@@ -10,7 +10,6 @@ export class player2 extends Component {
     private movement: number = 30;
     onLoad() {
         this.collider = this.node.getComponent(BoxCollider2D)
-        console.log(this.collider, 'collider')
         this.collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
         //初始化键盘监听
         systemEvent.on(SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
