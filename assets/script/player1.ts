@@ -13,7 +13,7 @@ export class player1 extends Component {
         this.collider = this.node.getComponent(BoxCollider2D)
         this.collider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
         //初始化键盘监听
-        systemEvent.on(SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+        // systemEvent.on(SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
     }
 
     onDestroy() {

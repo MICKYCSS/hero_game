@@ -96,8 +96,8 @@
     "_prefab": null,
     "_lpos": {
       "__type__": "cc.Vec3",
-      "x": 540,
-      "y": 320,
+      "x": 600,
+      "y": 375,
       "z": 0
     },
     "_lrot": {
@@ -180,7 +180,7 @@
     "_priority": 0,
     "_fov": 45,
     "_fovAxis": 0,
-    "_orthoHeight": 651.8410041841004,
+    "_orthoHeight": 558.3870967741935,
     "_near": 0,
     "_far": 1000,
     "_color": {
@@ -364,8 +364,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1000,
-      "height": 800
+      "width": 1400,
+      "height": 1000
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -388,9 +388,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 102,
-      "g": 65,
-      "b": 94,
+      "r": 151,
+      "g": 212,
+      "b": 76,
       "a": 255
     },
     "_spriteFrame": {
@@ -551,7 +551,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "2d562509-0536-4d55-b72b-875216878be7@f9941",
+      "__uuid__": "90ec228f-5505-494c-9932-c08c360c1c36@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -734,7 +734,7 @@
       "a": 255
     },
     "_spriteFrame": {
-      "__uuid__": "a34ead7a-fa60-40b2-9021-c40ebb6bb25e@f9941",
+      "__uuid__": "81d4a919-11cf-4aa9-b55c-1ef73e9ec0af@f9941",
       "__expectedType__": "cc.SpriteFrame"
     },
     "_type": 0,
@@ -998,9 +998,9 @@
     "_dstBlendFactor": 4,
     "_color": {
       "__type__": "cc.Color",
-      "r": 199,
-      "g": 113,
-      "b": 69,
+      "r": 62,
+      "g": 122,
+      "b": 216,
       "a": 255
     },
     "_spriteFrame": {
@@ -1218,7 +1218,7 @@
       "b": 255,
       "a": 255
     },
-    "_string": "迷宫追击",
+    "_string": "大富翁",
     "_horizontalAlign": 1,
     "_verticalAlign": 1,
     "_actualFontSize": 80,
@@ -1248,8 +1248,8 @@
     "__prefab": null,
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1080,
-      "height": 640
+      "width": 1200,
+      "height": 750
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -1284,8 +1284,8 @@
     "__prefab": null,
     "_alignFlags": 45,
     "_target": null,
-    "_left": 5.684341886080802e-14,
-    "_right": 5.684341886080802e-14,
+    "_left": -5.684341886080802e-14,
+    "_right": -5.684341886080802e-14,
     "_top": 0,
     "_bottom": 0,
     "_horizontalCenter": 0,
